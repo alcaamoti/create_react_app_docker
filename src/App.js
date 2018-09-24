@@ -8,11 +8,11 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to Earthbound</h1>
+          <h1 className="App-title">Welcome to Spacke</h1>
         </header>
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and get snazzy.
-          Some more things.
+          Some more things are here.
         </p>
       </div>
     );

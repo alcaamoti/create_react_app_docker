@@ -1,0 +1,22 @@
+sudo: required
+services:
+    - docker
+
+before_install:
+  - docker build -t alcaamoti/react-app -f Dockerfile.dev .
+
+script:
+  - docker run alcaamoti/react-app npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "docker-react"
+  env: "Docker-env"
+  bucket_name: "some-bucket-name"
+  bucket_path: "some-dir-name"
+  on: 
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+      secure: "$AWS_SECRET_KEY"
