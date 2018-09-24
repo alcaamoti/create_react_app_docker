@@ -7,6 +7,7 @@ before_install:
 
 script:
   - docker run alcaamoti/react-app npm run test -- --coverage
+  - docker run alcaamoti/react-app npm run build 
 
 deploy:
   provider: s3
@@ -16,4 +17,4 @@ deploy:
   secret_access_key: $AWS_SECRET_KEY
   bucket: $S3_BUCKET
   region: $AWS_REGION
-  local_dir: app/build
+  local_dir: build
