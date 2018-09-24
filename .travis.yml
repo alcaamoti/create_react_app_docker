@@ -17,4 +17,4 @@ deploy:
   secret_access_key: $AWS_SECRET_KEY
   bucket: $S3_BUCKET
   region: $AWS_REGION
-  local_dir: build
+  local_dir: app/build
