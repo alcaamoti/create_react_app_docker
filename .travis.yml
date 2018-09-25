@@ -3,18 +3,18 @@ services:
     - docker
 
 before_install:
-  - docker build -t alcaamoti/react-app -f Dockerfile .
+  - docker build -t alcaamoti/react-app -f Dockerfile.dev .
 
 script:
   - docker run alcaamoti/react-app npm run test -- --coverage
-  - docker run alcaamoti/react-app npm run build 
+
+before_deploy:
+  - docker build -t alcaamoti/react-app .
 
 deploy:
-  provider: s3
-  access_key_id: $AWS_ACCESS_KEY
-  on: 
+  provider: script
+  script: docker run $(printenv | grep -E '^AWS' | sed 's/AWS_/-e /g' | sed 's/-e /-e AWS_/g') alcaamoti/react-app
+  on:
     branch: master
-  secret_access_key: $AWS_SECRET_KEY
-  bucket: $S3_BUCKET
-  region: $AWS_REGION
+
 
