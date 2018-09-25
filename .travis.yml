@@ -14,7 +14,7 @@ before_deploy:
 deploy:
   skip_cleanup: true
   provider: script
-  script: chmod +x ./scripts/deploy.sh && ./scripts/deploy.sh
+  script: bash ./scripts/deploy.sh
   on:
     branch: master
 
