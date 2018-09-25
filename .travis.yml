@@ -7,16 +7,13 @@ before_install:
 
 script:
   - docker run alcaamoti/react-app-dev npm run test -- --coverage
-
-after_success:
   - docker build -t alcaamoti/react-app .
-
+#after_success:
+  
 
 deploy:
   provider: script
-  #script: bash scripts/deploy-client.sh
-  script:
-    - docker run $(printenv | grep -E '^AWS' | sed 's/AWS_/-e /g' | sed 's/-e /-e AWS_/g') alcaamoti/react-app
+  script: bash scripts/deploy.sh
   on:
     branch: master
 
