@@ -10,11 +10,12 @@ script:
 
 after_success:
   - docker build -t alcaamoti/react-app .
+  - bash scripts/deploy-client.sh
 
-deploy:
-  provider: script
-  script: bash scripts/deploy-client.sh
-  on:
-    branch: master
+# deploy:
+#   provider: script
+#   script: bash scripts/deploy-client.sh
+#   on:
+#     branch: master
 
 
