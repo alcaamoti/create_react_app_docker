@@ -12,6 +12,7 @@ before_deploy:
   - docker build -t alcaamoti/react-app .
 
 deploy:
+  skip_cleanup: true
   provider: script
   script: bash scripts/deploy.sh
   on:
