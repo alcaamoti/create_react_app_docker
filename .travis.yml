@@ -3,19 +3,21 @@ services:
     - docker
 
 before_install:
-  - docker build -t alcaamoti/react-app -f Dockerfile.dev .
+  - docker build -t alcaamoti/react-app-dev -f Dockerfile.dev .
 
 script:
-  - docker run alcaamoti/react-app npm run test -- --coverage
+  - docker run alcaamoti/react-app-dev npm run test -- --coverage
 
 after_success:
   - docker build -t alcaamoti/react-app .
-  - bash scripts/deploy-client.sh
 
-# deploy:
-#   provider: script
-#   script: bash scripts/deploy-client.sh
-#   on:
-#     branch: master
+
+deploy:
+  provider: script
+  #script: bash scripts/deploy-client.sh
+  script:
+    - docker run $(printenv | grep -E '^AWS' | sed 's/AWS_/-e /g' | sed 's/-e /-e AWS_/g') alcaamoti/react-app
+  on:
+    branch: master
 
 
